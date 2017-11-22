@@ -1,0 +1,90 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://componentes/Cano.gd" type="Script" id=1]
+[ext_resource path="res://2bcb80ed5003ccd.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 43.0787, 122.735 )
+
+[sub_resource type="SegmentShape2D" id=2]
+
+custom_solver_bias = 0.0
+a = Vector2( 0.569633, -66.7307 )
+b = Vector2( 1.88436, 41.7226 )
+
+[node name="Cano" type="Node2D"]
+
+transform/scale = Vector2( 1.801, 2.173 )
+z/z = 3
+script/script = ExtResource( 1 )
+velocidade = -300
+
+[node name="Baixo" type="Sprite" parent="."]
+
+transform/pos = Vector2( 4.00014, 145.419 )
+transform/scale = Vector2( 0.261159, 0.358342 )
+texture = ExtResource( 2 )
+
+[node name="Topo" type="Sprite" parent="."]
+
+transform/pos = Vector2( 4.00014, -166.76 )
+transform/scale = Vector2( 0.261159, 0.358342 )
+texture = ExtResource( 2 )
+flip_v = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 4.43213, -5.54018 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -1.26401, -185.998 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 1 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 2.51427, 170.912 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+transform/pos = Vector2( -1.26401, -185.998 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="Area2D"]
+
+transform/pos = Vector2( 2.51427, 170.912 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 1
+
+[node name="Pontuador" type="Area2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 50.5183, 2.29767 )
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pontuador"]
+
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[connection signal="body_enter" from="Area2D" to="." method="_on_Area2D_body_enter"]
+
+[connection signal="body_enter" from="Pontuador" to="." method="_on_Pontuador_body_enter"]
+
+
